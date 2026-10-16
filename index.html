@@ -1,0 +1,437 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#F3F3F6"><title>RocketPlan — Your Journey</title>
+<meta name="description" content="Your journey with RocketPlan: from sign-up to a paid invoice."><link rel="icon" type="image/png" href="https://flow.rocketplan.ai/favicon.png"><link rel="apple-touch-icon" href="https://flow.rocketplan.ai/apple-touch-icon.png">
+<meta property="og:title" content="RocketPlan — Your Journey"><meta property="og:image" content="https://flow.rocketplan.ai/img/6cbfe8a781bdcdb9cd213b0d51775029.jpg">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&amp;display=swap"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,wght@0,400;0,600;0,700;1,400&amp;display=swap">
+<style>
+html,body{margin:0;height:100%;background:#F3F3F6;color:#1E0D47;font-family:"IBM Plex Sans",-apple-system,"Segoe UI",Helvetica,Arial,sans-serif;overflow:hidden}
+*{box-sizing:border-box}
+#stage{position:fixed;left:0;right:0;top:0;bottom:64px;display:flex;align-items:center;justify-content:center}
+#frame{position:relative;flex:none;width:1920px;height:1080px;transform-origin:center center;box-shadow:0 18px 48px rgba(30,13,71,.16);background:#FBFAFD;overflow:hidden}
+#frame>section{position:absolute;inset:0;width:1920px;height:1080px;box-sizing:border-box;opacity:0;transition:opacity .35s;pointer-events:none}
+#frame>section.on{opacity:1;pointer-events:auto}
+#frame>section img{display:block}
+#frame>section h1,#frame>section h2,#frame>section h3,#frame>section p,#frame>section ul,#frame>section ol{margin:0}
+#frame>section ul,#frame>section ol{padding-left:1.2em}
+#frame>section table{border-collapse:collapse}
+x-shape{display:block;flex:none}
+x-shape[kind="arrow-right"]{clip-path:polygon(0 30%,60% 30%,60% 0,100% 50%,60% 100%,60% 70%,0 70%)}
+x-icon{display:inline-block;flex:none}x-icon svg{width:100%;height:100%;display:block}
+#bar{position:fixed;left:0;right:0;bottom:0;height:64px;display:flex;align-items:center;justify-content:center;gap:14px;background:#fff;border-top:1px solid #E4D8F6;font-size:14px;z-index:5}
+#bar button{height:40px;padding:0 18px;border:1px solid #D2CFDA;border-radius:999px;background:#fff;color:#1E0D47;font:inherit;font-weight:600;cursor:pointer}#bar button.primary{background:#9A00FF;border-color:#9A00FF;color:#fff}#bar button.primary:hover{background:#6D00E6}
+.arr{position:fixed;top:50%;transform:translateY(-50%);width:56px;height:56px;border-radius:999px;border:1px solid #D2CFDA;background:#fff;color:#1E0D47;font-size:40px;line-height:1;cursor:pointer;z-index:5;display:flex;align-items:center;justify-content:center;box-shadow:0 6px 20px rgba(30,13,71,.12)}.arr:hover{background:#9A00FF;border-color:#9A00FF;color:#fff}#arr-l{left:16px}#arr-r{right:16px}
+#hint{position:fixed;left:50%;top:16px;transform:translateX(-50%);background:rgba(30,13,71,.85);color:#fff;padding:8px 14px;border-radius:999px;font-size:13px;z-index:5;transition:opacity .5s}#hint.off{opacity:0;pointer-events:none}
+#ctr{min-width:56px;text-align:center;font-variant-numeric:tabular-nums}
+#bar button:hover{border-color:#9A00FF}#bar button.primary:hover{background:#6D00E6;border-color:#6D00E6}
+#dots{display:flex;gap:6px}#dots i{width:8px;height:8px;border-radius:999px;background:#D2CFDA;display:block;cursor:pointer}#dots i.on{background:#9A00FF}
+#hit-l,#hit-r{position:fixed;top:0;bottom:64px;width:30%;cursor:pointer}#hit-l{left:0}#hit-r{right:0}
+@media (max-width:700px){#dots{display:none}#bar{gap:10px}#bar button{padding:0 12px;font-size:13px}.arr{width:44px;height:44px;font-size:32px}#arr-l{left:8px}#arr-r{right:8px}}
+#fs .ic{display:none;width:18px;height:18px}
+@media (max-width:700px){#bar #fs{padding:0 11px}#fs .tx{display:none}#fs .ic{display:block}}
+body.pfs #stage{bottom:0}body.pfs #bar,body.pfs #hint,body.pfs .arr{display:none}body.pfs #hit-l,body.pfs #hit-r{bottom:0}body.pfs #frame{box-shadow:none}
+#fs-x{display:none;position:fixed;top:10px;right:10px;z-index:6;width:40px;height:40px;border-radius:999px;border:1px solid #D2CFDA;background:#fff;color:#1E0D47;font-size:24px;line-height:1;cursor:pointer;box-shadow:0 6px 20px rgba(30,13,71,.12)}body.pfs #fs-x{display:flex;align-items:center;justify-content:center}
+
+/* ---- phone layout: slides become a scrolling page ---- */
+@media (max-width:700px){
+html,body{overflow:auto;height:auto;background:#FBFAFD}
+#stage{position:static;display:block;padding:0 0 72px}
+#frame{position:static;width:auto;height:auto;transform:none!important;box-shadow:none;background:#FBFAFD;overflow:visible}
+#frame>section{position:relative!important;inset:auto!important;width:auto!important;height:auto!important;opacity:1!important;pointer-events:auto!important;padding:28px 20px 24px!important;gap:14px!important;display:flex!important;flex-direction:column!important;border-bottom:1px solid #E4D8F6;transition:none}
+#frame>section *{position:static!important;transform:none!important;max-width:100%}
+#frame>section div[style*="height:1080px"]{display:none!important}
+#frame>section div[style*="bottom:64px"]{display:none!important}
+#frame>section img[alt="RocketPlan"]{order:-1;width:150px!important;height:auto!important;margin:0 0 6px}
+#frame>section div[style*="flex-direction:row"]{flex-direction:column!important;gap:14px!important;align-items:stretch!important;justify-content:flex-start!important}
+#frame>section div[style*="justify-content:center"]{flex-direction:row!important;justify-content:center!important;gap:10px!important}
+#frame>section div[style*="display:grid"]{display:grid!important;grid-template-columns:1fr 1fr!important;gap:10px!important}
+#frame>section div[style*="repeat(3"]{grid-template-columns:1fr!important}
+#frame>section div[style*="width:"]{width:auto!important}
+#frame>section div[style*="height:"]{height:auto!important}
+#frame>section div[style*="padding:"]{padding:16px!important}
+#frame>section div[style*="padding-top:"]{padding:0!important}
+#frame>section div[style*="position:relative"]{display:flex!important;flex-direction:row!important;flex-wrap:wrap;gap:10px;justify-content:center;background:linear-gradient(160deg,#F4E5FF 0%,#E2CCFF 100%);border-radius:16px;padding:14px!important;margin-top:6px}
+#frame>section div[style*="width:100px;height:6px"]{width:64px!important;height:5px!important}
+#frame>section img{width:100%!important;height:auto!important;object-fit:contain!important;border-radius:12px!important}
+#frame>section img[style*="border-radius:28px"],#frame>section img[style*="border-radius:34px"]{width:47%!important;border-radius:22px!important;object-fit:cover!important;aspect-ratio:9/19.5}
+#frame>section img[alt^="RocketPlan logo"]{width:150px!important;align-self:center}
+#frame>section h1{font-size:34px!important;line-height:1.1!important;letter-spacing:-1px!important}
+#frame>section h2{font-size:26px!important;line-height:1.15!important}
+#frame>section h3{font-size:17px!important;line-height:1.25!important}
+#frame>section p{font-size:15px!important;line-height:1.45!important}
+#frame>section p[style*="font-size:24px"]{font-size:12.5px!important}
+#frame>section p[style*="text-transform:uppercase"]{letter-spacing:1.5px!important;font-size:11.5px!important}
+#frame>section p[style*="font-size:26px"],#frame>section p[style*="font-size:32px"]{font-size:15px!important}
+#frame>section p[style*="font-size:36px"]{font-size:16px!important}
+#frame>section p[style*="font-size:56px"]{font-size:30px!important;line-height:1.1!important}
+#frame>section p[style*="padding:12px 32px"]{padding:6px 12px!important;align-self:flex-start}
+#frame>section hr{width:100%!important}
+#frame>section x-icon{width:26px!important;height:26px!important}
+#frame>section div[style*="flex-direction:column;gap:6px"]{gap:2px!important}
+#frame>section div[style*="gap:28px"]{gap:12px!important}
+
+#frame>section .crop{height:auto!important;overflow:visible;position:static!important}#frame>section .crop img{position:static!important;width:100%!important;height:auto!important;max-width:100%!important}
+.arr,#hint,#hit-l,#hit-r{display:none!important}
+#bar{height:60px;gap:8px;padding:0 10px}#dots{display:none}#ctr{display:none}#bar #fs{display:none}
+}
+@media (max-width:700px) and (orientation:landscape){#frame>section img[style*="border-radius:28px"],#frame>section img[style*="border-radius:34px"]{width:30%!important}}
+#book{height:40px;padding:0 18px;border-radius:999px;border:1px solid #9A00FF;background:#fff;color:#9A00FF;font:inherit;font-weight:600;text-decoration:none;display:inline-flex;align-items:center}#book:hover{background:#F4E5FF}
+@media (max-width:700px){#book{padding:0 12px;font-size:13px}}
+@media (prefers-reduced-motion:reduce){#frame>section{transition:none}}
+</style></head><body>
+<div id="stage"><div id="frame"><section id="cover" data-transition="fade" style="background:#FBFAFD;color:#1E0D47;font-family:'IBM Plex Sans', Arial, sans-serif;padding:72px 96px 160px;display:flex;flex-direction:column;gap:0px">
+<div style="position:absolute;left:1000px;top:0px;width:920px;height:1080px;background:linear-gradient(160deg, #F4E5FF 0%, #E2CCFF 100%)"></div>
+<div style="display:flex;flex-direction:row;align-items:center;justify-content:space-between">
+<img src="https://flow.rocketplan.ai/img/454955e6c5f62c85d9ca0b89e7b320ba.png" alt="RocketPlan" style="width:300px;height:50px;object-fit:contain">
+<p style="font-size:24px;font-weight:500;letter-spacing:3px;text-transform:uppercase;color:#6D00E6;background:#F4E5FF;border:1px solid #E4D8F6;border-radius:14px;padding:12px 32px">Your journey</p>
+</div>
+<div style="display:flex;flex-direction:row;gap:48px;align-items:start">
+<div style="width:800px;flex:none;display:flex;flex-direction:column;gap:28px;padding:90px 0 0 0">
+<h1 style="font-family:'Source Serif 4', Georgia, serif;font-size:76px;line-height:1.05;font-weight:700;letter-spacing:-2px">From sign-up to<br>a paid invoice</h1>
+<div style="width:100px;height:6px;background:#9A00FF;border-radius:3px"></div>
+<p style="font-size:32px;line-height:1.4;color:#3E3560">One app for the whole job. Your crew captures on their phones, AI drafts the scope and equipment, and the Invoice Backup Package goes to the adjuster as a link.</p>
+<p style="font-size:26px;font-weight:600;color:#6D00E6">Set up in minutes &#160;·&#160; Capture on site &#160;·&#160; Get paid</p>
+</div>
+<div style="position:relative;width:880px;height:760px;flex:none">
+<img src="https://flow.rocketplan.ai/img/6cbfe8a781bdcdb9cd213b0d51775029.jpg" alt="The adjuster's view of the Invoice Backup Package" style="position:absolute;left:40px;top:30px;width:840px;height:525px;object-fit:contain;border-radius:16px;border:1px solid #D9C7F5;box-shadow:0 24px 60px rgba(26,20,64,0.22)">
+<img src="https://flow.rocketplan.ai/img/68e69ec02a2ac91393a20ce1e2daf29f.jpg" alt="RocketScan thermal capture" style="position:absolute;left:0px;top:268px;width:226px;height:489px;object-fit:cover;border-radius:34px;box-shadow:0 24px 50px rgba(26,20,64,0.32)">
+<img src="https://flow.rocketplan.ai/img/4ac059132051beca636f2fecddc18bc9.jpg" alt="RocketScope AI draft scope" style="position:absolute;left:250px;top:238px;width:226px;height:489px;object-fit:cover;border-radius:34px;box-shadow:0 24px 50px rgba(26,20,64,0.32)">
+</div>
+</div>
+<div style="position:absolute;left:96px;right:96px;bottom:64px;display:flex;flex-direction:row;justify-content:space-between;border-top:1px solid #E4D8F6;padding:20px 0 0 0">
+<p style="font-size:24px;color:#6B6480">RocketPlan &#160;|&#160; rocketplan.ai</p>
+<p style="font-size:24px;color:#6B6480">Sample job for illustration</p>
+</div>
+</section>
+<section id="package" data-transition="fade" style="background:#FBFAFD;color:#1E0D47;font-family:'IBM Plex Sans', Arial, sans-serif;padding:96px 128px 160px;display:flex;flex-direction:column;gap:40px">
+<p style="font-size:24px;font-weight:600;color:#9A00FF;letter-spacing:2px;text-transform:uppercase">Where the journey ends</p>
+<h2 style="font-family:'Source Serif 4', Georgia, serif;font-size:72px;font-weight:600;line-height:1.1">One link with everything the adjuster needs</h2>
+<p style="font-size:30px;line-height:1.4;color:#4A3D66;max-width:1400px">The Invoice Backup Package is built from what your crew captured on site. Nothing is re-typed at the office.</p>
+<div style="display:grid;grid-template-columns:repeat(4, 1fr);gap:24px">
+<div style="background:#FFFFFF;border:1px solid #D2CFDA;border-radius:16px;padding:28px;display:flex;flex-direction:column;gap:12px"><x-icon name="Search" style="width:40px;height:40px;color:#9A00FF"></x-icon><h3 style="font-size:30px;font-weight:600">Photos and IR, side by side</h3><p style="font-size:24px;line-height:1.4;color:#777185">By unit and room</p></div>
+<div style="background:#FFFFFF;border:1px solid #D2CFDA;border-radius:16px;padding:28px;display:flex;flex-direction:column;gap:12px"><x-icon name="Activity" style="width:40px;height:40px;color:#9A00FF"></x-icon><h3 style="font-size:30px;font-weight:600">Drying logs</h3><p style="font-size:24px;line-height:1.4;color:#777185">Every reading, every day</p></div>
+<div style="background:#FFFFFF;border:1px solid #D2CFDA;border-radius:16px;padding:28px;display:flex;flex-direction:column;gap:12px"><x-icon name="Home" style="width:40px;height:40px;color:#9A00FF"></x-icon><h3 style="font-size:30px;font-weight:600">Sketch</h3><p style="font-size:24px;line-height:1.4;color:#777185">Floor plan with measurements</p></div>
+<div style="background:#FFFFFF;border:1px solid #D2CFDA;border-radius:16px;padding:28px;display:flex;flex-direction:column;gap:12px"><x-icon name="Book" style="width:40px;height:40px;color:#9A00FF"></x-icon><h3 style="font-size:30px;font-weight:600">Scope of work</h3><p style="font-size:24px;line-height:1.4;color:#777185">Each line tied to its photo</p></div>
+<div style="background:#FFFFFF;border:1px solid #D2CFDA;border-radius:16px;padding:28px;display:flex;flex-direction:column;gap:12px"><x-icon name="Tool" style="width:40px;height:40px;color:#9A00FF"></x-icon><h3 style="font-size:30px;font-weight:600">Equipment Logs</h3><p style="font-size:24px;line-height:1.4;color:#777185">Units, days, unit-days</p></div>
+<div style="background:#FFFFFF;border:1px solid #D2CFDA;border-radius:16px;padding:28px;display:flex;flex-direction:column;gap:12px"><x-icon name="Verified" style="width:40px;height:40px;color:#9A00FF"></x-icon><h3 style="font-size:30px;font-weight:600">Work Authorization</h3><p style="font-size:24px;line-height:1.4;color:#777185">Signed before day one</p></div>
+<div style="background:#FFFFFF;border:1px solid #D2CFDA;border-radius:16px;padding:28px;display:flex;flex-direction:column;gap:12px"><x-icon name="CheckCircle" style="width:40px;height:40px;color:#9A00FF"></x-icon><h3 style="font-size:30px;font-weight:600">Certificate of Completion</h3><p style="font-size:24px;line-height:1.4;color:#777185">Signed at the end</p></div>
+<div style="background:#F4E5FF;border:1px solid #F4E5FF;border-radius:16px;padding:28px;display:flex;flex-direction:column;gap:12px"><x-icon name="Link" style="width:40px;height:40px;color:#9A00FF"></x-icon><h3 style="font-size:30px;font-weight:600">Sent as a link</h3><p style="font-size:24px;line-height:1.4;color:#4A3D66">Or as a PDF, your choice</p></div>
+</div>
+<img src="https://flow.rocketplan.ai/img/454955e6c5f62c85d9ca0b89e7b320ba.png" alt="RocketPlan" style="position:absolute;left:128px;top:40px;width:240px;height:40px;object-fit:contain">
+<p style="position:absolute;left:128px;bottom:64px;width:1664px;font-size:24px;color:#777185">Organized by project, unit and room, with the project, loss and customer details up front.</p>
+</section>
+<section id="map" data-transition="fade" style="background:#F3F3F6;color:#1E0D47;font-family:'IBM Plex Sans', Arial, sans-serif;padding:96px 128px 160px;display:flex;flex-direction:column;gap:40px">
+<p style="font-size:24px;font-weight:600;color:#9A00FF;letter-spacing:2px;text-transform:uppercase">The journey</p>
+<h2 style="font-family:'Source Serif 4', Georgia, serif;font-size:72px;font-weight:600;line-height:1.1">A few easy steps from sign-up to getting paid</h2>
+<div style="display:grid;grid-template-columns:repeat(3, 1fr);gap:32px">
+<div style="background:#FFFFFF;border:1px solid #D2CFDA;border-radius:20px;padding:36px;display:flex;flex-direction:column;gap:20px">
+<h3 style="font-size:36px;font-weight:700;color:#9A00FF">Set up</h3>
+<p style="font-size:24px;color:#777185">Minutes, from the office or the truck</p>
+<hr style="border-top:1px solid #E8E7ED;width:100%">
+<p style="font-size:30px;line-height:1.4">Sign up and invite your crew</p>
+<p style="font-size:30px;line-height:1.4">Create the job</p>
+<p style="font-size:30px;line-height:1.4">Capture job info and rooms</p>
+<p style="font-size:30px;line-height:1.4">Work authorization signed</p>
+<p style="font-size:30px;line-height:1.4">Deductible collected</p>
+</div>
+<div style="background:#FFFFFF;border:1px solid #D2CFDA;border-radius:20px;padding:36px;display:flex;flex-direction:column;gap:20px">
+<h3 style="font-size:36px;font-weight:700;color:#9A00FF">On site</h3>
+<p style="font-size:24px;color:#777185">Phone in hand, room by room</p>
+<hr style="border-top:1px solid #E8E7ED;width:100%">
+<p style="font-size:30px;line-height:1.4">Scan for damage: photos and IR</p>
+<p style="font-size:30px;line-height:1.4">Atmospheric and moisture readings</p>
+<p style="font-size:30px;line-height:1.4">Scope, drafted by AI, confirmed by you</p>
+<p style="font-size:30px;line-height:1.4">Equipment placed and logged</p>
+</div>
+<div style="background:#FFFFFF;border:1px solid #D2CFDA;border-radius:20px;padding:36px;display:flex;flex-direction:column;gap:20px">
+<h3 style="font-size:36px;font-weight:700;color:#9A00FF">Get paid</h3>
+<p style="font-size:24px;color:#777185">The day the job is done</p>
+<hr style="border-top:1px solid #E8E7ED;width:100%">
+<p style="font-size:30px;line-height:1.4">Invoice Backup Package sent as a link</p>
+</div>
+</div>
+<img src="https://flow.rocketplan.ai/img/454955e6c5f62c85d9ca0b89e7b320ba.png" alt="RocketPlan" style="position:absolute;left:128px;top:40px;width:240px;height:40px;object-fit:contain">
+<p style="position:absolute;left:128px;bottom:64px;width:1664px;font-size:24px;color:#777185">Set-up and authorization happen once per job, before the first fan is placed. On-site capture repeats each visit until the job is dry.</p>
+</section>
+<section id="s01-signup" data-transition="fade" style="background:#FBFAFD;color:#1E0D47;font-family:'IBM Plex Sans', Arial, sans-serif;padding:96px 128px 176px;display:flex;flex-direction:column;gap:32px">
+<p style="font-size:24px;font-weight:600;color:#9A00FF;letter-spacing:2px;text-transform:uppercase">Set up</p>
+<h2 style="font-family:'Source Serif 4', Georgia, serif;font-size:72px;font-weight:600;line-height:1.1">Sign up in minutes</h2>
+<div style="display:flex;flex-direction:row;gap:48px">
+<div style="flex:1;display:flex;flex-direction:column;gap:28px">
+<div style="display:flex;flex-direction:column;gap:6px"><p style="font-size:24px;font-weight:600;color:#777185">You</p><p style="font-size:30px;line-height:1.4">Download RocketPlan from the App Store, create your company and invite your crew by text.</p></div>
+<div style="display:flex;flex-direction:column;gap:6px"><p style="font-size:24px;font-weight:600;color:#777185">RocketPlan</p><p style="font-size:30px;line-height:1.4">Sets up your account and puts your company name and logo on every report from here on.</p></div>
+<div style="display:flex;flex-direction:column;gap:6px"><p style="font-size:24px;font-weight:600;color:#9A00FF">You walk away with</p><p style="font-size:30px;line-height:1.4;font-weight:600">Your whole team in one place, the same morning.</p></div>
+</div>
+<div style="width:600px;background:#F4E5FF;border-radius:20px;padding:40px;display:flex;flex-direction:column;gap:16px">
+<p style="font-size:24px;font-weight:600;color:#9A00FF">On the sample job</p>
+<p style="font-size:30px;line-height:1.4">Northshore Restoration signs up Monday morning. Project manager Luis Ferreira and two technicians are in before the first call comes in.</p>
+</div>
+</div>
+<img src="https://flow.rocketplan.ai/img/454955e6c5f62c85d9ca0b89e7b320ba.png" alt="RocketPlan" style="position:absolute;left:128px;top:40px;width:240px;height:40px;object-fit:contain">
+<div style="position:absolute;left:128px;bottom:64px;width:1664px;display:flex;flex-direction:row;gap:8px">
+<div style="flex:1;border-top:6px solid #9A00FF;padding:10px 0 0 0"><p style="font-size:24px;color:#1E0D47;font-weight:600">Set up</p></div>
+<div style="flex:1;border-top:6px solid #E4D8F6;padding:10px 0 0 0"><p style="font-size:24px;color:#777185">Authorize</p></div>
+<div style="flex:1;border-top:6px solid #E4D8F6;padding:10px 0 0 0"><p style="font-size:24px;color:#777185">On site</p></div>
+<div style="flex:1;border-top:6px solid #E4D8F6;padding:10px 0 0 0"><p style="font-size:24px;color:#777185">Get paid</p></div>
+</div>
+</section>
+<section id="s02-job" data-transition="fade" style="background:#FBFAFD;color:#1E0D47;font-family:'IBM Plex Sans', Arial, sans-serif;padding:96px 128px 176px;display:flex;flex-direction:column;gap:32px">
+<p style="font-size:24px;font-weight:600;color:#9A00FF;letter-spacing:2px;text-transform:uppercase">Set up</p>
+<h2 style="font-family:'Source Serif 4', Georgia, serif;font-size:72px;font-weight:600;line-height:1.1">Create the job</h2>
+<div style="display:flex;flex-direction:row;gap:48px">
+<div style="flex:1;display:flex;flex-direction:column;gap:28px">
+<div style="display:flex;flex-direction:column;gap:6px"><p style="font-size:24px;font-weight:600;color:#777185">You</p><p style="font-size:30px;line-height:1.4">Enter the address, customer, claim number, carrier and adjuster, and the loss date and type.</p></div>
+<div style="display:flex;flex-direction:column;gap:6px"><p style="font-size:24px;font-weight:600;color:#777185">RocketPlan</p><p style="font-size:30px;line-height:1.4">Opens the job file. Everything captured from now on lands under it, by unit and room.</p></div>
+<div style="display:flex;flex-direction:column;gap:6px"><p style="font-size:24px;font-weight:600;color:#9A00FF">You walk away with</p><p style="font-size:30px;line-height:1.4;font-weight:600">One job file your crew, your office and the adjuster all see.</p></div>
+</div>
+<div style="width:640px;display:flex;flex-direction:column;gap:20px">
+<div class="crop" style="width:600px;height:560px;overflow:hidden;background:#FFFFFF;border:1px solid #D2CFDA;border-radius:16px;box-shadow:0 14px 32px rgba(26,20,64,0.12);position:relative"><img src="https://flow.rocketplan.ai/img/93f0b495798b209b63be5a3f13460c84.jpg" alt="Job intake form: Dana Whitfield, 1727 Maple Ave Unit 107, water loss, Pacific Mutual" style="position:absolute;left:-1027px;top:-225px;width:1662px;height:1039px;max-width:none"></div>
+<p style="font-size:24px;line-height:1.4;color:#777185">The sample job: Dana Whitfield, 1727 Maple Ave Unit 107, claim WTR-2026-08841 with Pacific Mutual.</p>
+</div>
+</div>
+<img src="https://flow.rocketplan.ai/img/454955e6c5f62c85d9ca0b89e7b320ba.png" alt="RocketPlan" style="position:absolute;left:128px;top:40px;width:240px;height:40px;object-fit:contain">
+<div style="position:absolute;left:128px;bottom:64px;width:1664px;display:flex;flex-direction:row;gap:8px">
+<div style="flex:1;border-top:6px solid #9A00FF;padding:10px 0 0 0"><p style="font-size:24px;color:#1E0D47;font-weight:600">Set up</p></div>
+<div style="flex:1;border-top:6px solid #E4D8F6;padding:10px 0 0 0"><p style="font-size:24px;color:#777185">Authorize</p></div>
+<div style="flex:1;border-top:6px solid #E4D8F6;padding:10px 0 0 0"><p style="font-size:24px;color:#777185">On site</p></div>
+<div style="flex:1;border-top:6px solid #E4D8F6;padding:10px 0 0 0"><p style="font-size:24px;color:#777185">Get paid</p></div>
+</div>
+</section>
+<section id="s03-info" data-transition="fade" style="background:#FBFAFD;color:#1E0D47;font-family:'IBM Plex Sans', Arial, sans-serif;padding:96px 128px 176px;display:flex;flex-direction:column;gap:32px">
+<p style="font-size:24px;font-weight:600;color:#9A00FF;letter-spacing:2px;text-transform:uppercase">Set up</p>
+<h2 style="font-family:'Source Serif 4', Georgia, serif;font-size:72px;font-weight:600;line-height:1.1">Capture the job info</h2>
+<div style="display:flex;flex-direction:row;gap:48px">
+<div style="flex:1;display:flex;flex-direction:column;gap:28px">
+<div style="display:flex;flex-direction:column;gap:6px"><p style="font-size:24px;font-weight:600;color:#777185">You</p><p style="font-size:30px;line-height:1.4">Add the affected units and rooms, flooring and the affected walls, and measure each room in RocketSketch.</p></div>
+<div style="display:flex;flex-direction:column;gap:6px"><p style="font-size:24px;font-weight:600;color:#777185">RocketPlan</p><p style="font-size:30px;line-height:1.4">Draws the floor plan with wall lengths and keeps a room checklist so nothing gets skipped on site.</p></div>
+<div style="display:flex;flex-direction:column;gap:6px"><p style="font-size:24px;font-weight:600;color:#9A00FF">You walk away with</p><p style="font-size:30px;line-height:1.4;font-weight:600">A sketch and room list the scope and equipment are built on.</p></div>
+</div>
+<div style="width:640px;display:flex;flex-direction:column;gap:20px">
+<img src="https://flow.rocketplan.ai/img/dbd3bb92e41040561e5685975b615b4b.jpg" alt="RocketSketch floor plan of the Rec Room and Home Office with wall lengths" style="width:640px;height:400px;object-fit:contain;background:#FFFFFF;border:1px solid #D2CFDA;border-radius:16px;box-shadow:0 14px 32px rgba(26,20,64,0.12)">
+<p style="font-size:24px;line-height:1.4;color:#777185">Home Office 13′ 9″ × 11′ 10″ and Rec Room 17′ 1″ × 14′ 5″, sharing the wall where the supply line failed.</p>
+</div>
+</div>
+<img src="https://flow.rocketplan.ai/img/454955e6c5f62c85d9ca0b89e7b320ba.png" alt="RocketPlan" style="position:absolute;left:128px;top:40px;width:240px;height:40px;object-fit:contain">
+<div style="position:absolute;left:128px;bottom:64px;width:1664px;display:flex;flex-direction:row;gap:8px">
+<div style="flex:1;border-top:6px solid #9A00FF;padding:10px 0 0 0"><p style="font-size:24px;color:#1E0D47;font-weight:600">Set up</p></div>
+<div style="flex:1;border-top:6px solid #E4D8F6;padding:10px 0 0 0"><p style="font-size:24px;color:#777185">Authorize</p></div>
+<div style="flex:1;border-top:6px solid #E4D8F6;padding:10px 0 0 0"><p style="font-size:24px;color:#777185">On site</p></div>
+<div style="flex:1;border-top:6px solid #E4D8F6;padding:10px 0 0 0"><p style="font-size:24px;color:#777185">Get paid</p></div>
+</div>
+</section>
+<section id="s04-auth" data-transition="fade" style="background:#FBFAFD;color:#1E0D47;font-family:'IBM Plex Sans', Arial, sans-serif;padding:96px 128px 176px;display:flex;flex-direction:column;gap:32px">
+<p style="font-size:24px;font-weight:600;color:#9A00FF;letter-spacing:2px;text-transform:uppercase">Authorize</p>
+<h2 style="font-family:'Source Serif 4', Georgia, serif;font-size:72px;font-weight:600;line-height:1.1">Get the work authorization signed</h2>
+<div style="display:flex;flex-direction:row;gap:48px">
+<div style="flex:1;display:flex;flex-direction:column;gap:28px">
+<div style="display:flex;flex-direction:column;gap:6px"><p style="font-size:24px;font-weight:600;color:#777185">You</p><p style="font-size:30px;line-height:1.4">Send the Work Authorization from the job. The customer signs on their phone.</p></div>
+<div style="display:flex;flex-direction:column;gap:6px"><p style="font-size:24px;font-weight:600;color:#777185">RocketPlan</p><p style="font-size:30px;line-height:1.4">Emails it with a one-time code and e-consent, seals the audit trail and files the signed copy in the job.</p></div>
+<div style="display:flex;flex-direction:column;gap:6px"><p style="font-size:24px;font-weight:600;color:#9A00FF">You walk away with</p><p style="font-size:30px;line-height:1.4;font-weight:600">Authorization in hand before the first fan is placed.</p></div>
+</div>
+<div style="width:640px;display:flex;flex-direction:column;gap:20px">
+<div class="crop" style="width:600px;height:550px;overflow:hidden;background:#FFFFFF;border:1px solid #D2CFDA;border-radius:16px;box-shadow:0 14px 32px rgba(26,20,64,0.12);position:relative"><img src="https://flow.rocketplan.ai/img/0786036a915b78dc11282c1b78677998.jpg" alt="Work Authorization and Direction of Payment, signed by Dana Whitfield at 9:12 AM, tamper-evident record" style="position:absolute;left:0px;top:-61px;width:600px;height:1300px;max-width:none"></div>
+<p style="font-size:24px;line-height:1.4;color:#777185">Signed on September 3, the day the crew arrives. Signer, time, device and document hash stay with the job.</p>
+</div>
+</div>
+<img src="https://flow.rocketplan.ai/img/454955e6c5f62c85d9ca0b89e7b320ba.png" alt="RocketPlan" style="position:absolute;left:128px;top:40px;width:240px;height:40px;object-fit:contain">
+<div style="position:absolute;left:128px;bottom:64px;width:1664px;display:flex;flex-direction:row;gap:8px">
+<div style="flex:1;border-top:6px solid #E4D8F6;padding:10px 0 0 0"><p style="font-size:24px;color:#777185">Set up</p></div>
+<div style="flex:1;border-top:6px solid #9A00FF;padding:10px 0 0 0"><p style="font-size:24px;color:#1E0D47;font-weight:600">Authorize</p></div>
+<div style="flex:1;border-top:6px solid #E4D8F6;padding:10px 0 0 0"><p style="font-size:24px;color:#777185">On site</p></div>
+<div style="flex:1;border-top:6px solid #E4D8F6;padding:10px 0 0 0"><p style="font-size:24px;color:#777185">Get paid</p></div>
+</div>
+</section>
+<section id="s05-deductible" data-transition="fade" style="background:#FBFAFD;color:#1E0D47;font-family:'IBM Plex Sans', Arial, sans-serif;padding:96px 128px 176px;display:flex;flex-direction:column;gap:32px">
+<p style="font-size:24px;font-weight:600;color:#9A00FF;letter-spacing:2px;text-transform:uppercase">Authorize</p>
+<h2 style="font-family:'Source Serif 4', Georgia, serif;font-size:72px;font-weight:600;line-height:1.1">Collect the deductible</h2>
+<div style="display:flex;flex-direction:row;gap:48px">
+<div style="flex:1;display:flex;flex-direction:column;gap:28px">
+<div style="display:flex;flex-direction:column;gap:6px"><p style="font-size:24px;font-weight:600;color:#777185">You</p><p style="font-size:30px;line-height:1.4">Request the deductible from the job with RocketPay. The customer pays by card on your phone or from a pay link.</p></div>
+<div style="display:flex;flex-direction:column;gap:6px"><p style="font-size:24px;font-weight:600;color:#777185">RocketPlan</p><p style="font-size:30px;line-height:1.4">Records the payment against the job, shows collected and outstanding, and sends the customer a receipt.</p></div>
+<div style="display:flex;flex-direction:column;gap:6px"><p style="font-size:24px;font-weight:600;color:#9A00FF">You walk away with</p><p style="font-size:30px;line-height:1.4;font-weight:600">The deductible in the bank on day one, not chased at the end.</p></div>
+<p style="font-size:24px;line-height:1.4;color:#777185">RocketPay activation and approval requirements apply.</p>
+</div>
+<div style="width:640px;display:flex;flex-direction:column;gap:20px">
+<div class="crop" style="width:600px;height:336px;overflow:hidden;background:#FFFFFF;border:1px solid #D2CFDA;border-radius:16px;box-shadow:0 14px 32px rgba(26,20,64,0.12);position:relative"><img src="https://flow.rocketplan.ai/img/0786036a915b78dc11282c1b78677998.jpg" alt="Deductible of $1,000 paid by card at 9:20 AM; collected $1,000, outstanding $0" style="position:absolute;left:0px;top:-687px;width:600px;height:1300px;max-width:none"></div>
+<p style="font-size:24px;line-height:1.4;color:#777185">Card on the phone or a pay link. On the sample job the $1,000 deductible is paid at 9:20, eight minutes after the signature, and the office sees it at once.</p>
+</div>
+</div>
+<img src="https://flow.rocketplan.ai/img/454955e6c5f62c85d9ca0b89e7b320ba.png" alt="RocketPlan" style="position:absolute;left:128px;top:40px;width:240px;height:40px;object-fit:contain">
+<div style="position:absolute;left:128px;bottom:64px;width:1664px;display:flex;flex-direction:row;gap:8px">
+<div style="flex:1;border-top:6px solid #E4D8F6;padding:10px 0 0 0"><p style="font-size:24px;color:#777185">Set up</p></div>
+<div style="flex:1;border-top:6px solid #9A00FF;padding:10px 0 0 0"><p style="font-size:24px;color:#1E0D47;font-weight:600">Authorize</p></div>
+<div style="flex:1;border-top:6px solid #E4D8F6;padding:10px 0 0 0"><p style="font-size:24px;color:#777185">On site</p></div>
+<div style="flex:1;border-top:6px solid #E4D8F6;padding:10px 0 0 0"><p style="font-size:24px;color:#777185">Get paid</p></div>
+</div>
+</section>
+<section id="s06-scan" data-transition="fade" style="background:#FBFAFD;color:#1E0D47;font-family:'IBM Plex Sans', Arial, sans-serif;padding:96px 128px 176px;display:flex;flex-direction:column;gap:32px">
+<p style="font-size:24px;font-weight:600;color:#9A00FF;letter-spacing:2px;text-transform:uppercase">On site</p>
+<h2 style="font-family:'Source Serif 4', Georgia, serif;font-size:72px;font-weight:600;line-height:1.1">Scan for damage: photos and IR</h2>
+<div style="display:flex;flex-direction:row;gap:48px">
+<div style="flex:1;display:flex;flex-direction:column;gap:28px">
+<div style="display:flex;flex-direction:column;gap:6px"><p style="font-size:24px;font-weight:600;color:#777185">You</p><p style="font-size:30px;line-height:1.4">Walk each room with your phone and a FLIR camera. Shoot photos and thermal shots of every affected surface in RocketScan.</p></div>
+<div style="display:flex;flex-direction:column;gap:6px"><p style="font-size:24px;font-weight:600;color:#777185">RocketPlan</p><p style="font-size:30px;line-height:1.4">Tags every shot to its room, pairs each photo with its thermal image side by side, and syncs when you are back in signal.</p></div>
+<div style="display:flex;flex-direction:column;gap:6px"><p style="font-size:24px;font-weight:600;color:#9A00FF">You walk away with</p><p style="font-size:30px;line-height:1.4;font-weight:600">The evidence adjusters ask for, labelled, before you leave the site.</p></div>
+</div>
+<div style="width:640px;display:flex;flex-direction:column;gap:20px">
+<div style="display:flex;flex-direction:row;gap:24px;justify-content:center">
+<img src="https://flow.rocketplan.ai/img/489fc46737e79409fd7b8f90428c9a51.jpg" alt="RocketScan: regular photo of the wall" style="width:240px;height:520px;object-fit:cover;border-radius:28px;box-shadow:0 14px 32px rgba(26,20,64,0.18)">
+<img src="https://flow.rocketplan.ai/img/68e69ec02a2ac91393a20ce1e2daf29f.jpg" alt="RocketScan: thermal view of the same wall" style="width:240px;height:520px;object-fit:cover;border-radius:28px;box-shadow:0 14px 32px rgba(26,20,64,0.18)">
+</div>
+<p style="font-size:24px;line-height:1.4;color:#777185;text-align:center">Regular photo, then the thermal view of the same spot. 42 photos and 14 thermal pairs on the sample job.</p>
+</div>
+</div>
+<img src="https://flow.rocketplan.ai/img/454955e6c5f62c85d9ca0b89e7b320ba.png" alt="RocketPlan" style="position:absolute;left:128px;top:40px;width:240px;height:40px;object-fit:contain">
+<div style="position:absolute;left:128px;bottom:64px;width:1664px;display:flex;flex-direction:row;gap:8px">
+<div style="flex:1;border-top:6px solid #E4D8F6;padding:10px 0 0 0"><p style="font-size:24px;color:#777185">Set up</p></div>
+<div style="flex:1;border-top:6px solid #E4D8F6;padding:10px 0 0 0"><p style="font-size:24px;color:#777185">Authorize</p></div>
+<div style="flex:1;border-top:6px solid #9A00FF;padding:10px 0 0 0"><p style="font-size:24px;color:#1E0D47;font-weight:600">On site</p></div>
+<div style="flex:1;border-top:6px solid #E4D8F6;padding:10px 0 0 0"><p style="font-size:24px;color:#777185">Get paid</p></div>
+</div>
+</section>
+<section id="s07-readings" data-transition="fade" style="background:#FBFAFD;color:#1E0D47;font-family:'IBM Plex Sans', Arial, sans-serif;padding:96px 128px 176px;display:flex;flex-direction:column;gap:32px">
+<p style="font-size:24px;font-weight:600;color:#9A00FF;letter-spacing:2px;text-transform:uppercase">On site</p>
+<h2 style="font-family:'Source Serif 4', Georgia, serif;font-size:72px;font-weight:600;line-height:1.1">Log atmospheric and moisture readings</h2>
+<div style="display:flex;flex-direction:row;gap:48px">
+<div style="flex:1;display:flex;flex-direction:column;gap:28px">
+<div style="display:flex;flex-direction:column;gap:6px"><p style="font-size:24px;font-weight:600;color:#777185">You</p><p style="font-size:30px;line-height:1.4">Each visit, log temperature, humidity and moisture in RocketDry. A photo of the meter travels with every reading.</p></div>
+<div style="display:flex;flex-direction:column;gap:6px"><p style="font-size:24px;font-weight:600;color:#777185">RocketPlan</p><p style="font-size:30px;line-height:1.4">Builds the drying log per room per day, flags a missed day, and shows when each room reaches dry standard.</p></div>
+<div style="display:flex;flex-direction:column;gap:6px"><p style="font-size:24px;font-weight:600;color:#9A00FF">You walk away with</p><p style="font-size:30px;line-height:1.4;font-weight:600">Proof of drying nobody can argue with.</p></div>
+</div>
+<div style="width:640px;display:flex;flex-direction:row;align-items:center;gap:32px">
+<img src="https://flow.rocketplan.ai/img/7a27dcb0907a420cf600048e26d779aa.jpg" alt="RocketDry: drywall reading with meter photo and drying goals" style="width:258px;height:560px;object-fit:cover;border-radius:28px;box-shadow:0 14px 32px rgba(26,20,64,0.18)">
+<p style="flex:1;font-size:24px;line-height:1.4;color:#777185">Material, reading, meter photo and the drying goal on one screen. On the sample job the Home Office reaches dry standard on September 6, day 4; the Rec Room's missing day-4 reading is flagged in the package.</p>
+</div>
+</div>
+<img src="https://flow.rocketplan.ai/img/454955e6c5f62c85d9ca0b89e7b320ba.png" alt="RocketPlan" style="position:absolute;left:128px;top:40px;width:240px;height:40px;object-fit:contain">
+<div style="position:absolute;left:128px;bottom:64px;width:1664px;display:flex;flex-direction:row;gap:8px">
+<div style="flex:1;border-top:6px solid #E4D8F6;padding:10px 0 0 0"><p style="font-size:24px;color:#777185">Set up</p></div>
+<div style="flex:1;border-top:6px solid #E4D8F6;padding:10px 0 0 0"><p style="font-size:24px;color:#777185">Authorize</p></div>
+<div style="flex:1;border-top:6px solid #9A00FF;padding:10px 0 0 0"><p style="font-size:24px;color:#1E0D47;font-weight:600">On site</p></div>
+<div style="flex:1;border-top:6px solid #E4D8F6;padding:10px 0 0 0"><p style="font-size:24px;color:#777185">Get paid</p></div>
+</div>
+</section>
+<section id="s08-scope" data-transition="fade" style="background:#FBFAFD;color:#1E0D47;font-family:'IBM Plex Sans', Arial, sans-serif;padding:96px 128px 176px;display:flex;flex-direction:column;gap:32px">
+<p style="font-size:24px;font-weight:600;color:#9A00FF;letter-spacing:2px;text-transform:uppercase">On site</p>
+<h2 style="font-family:'Source Serif 4', Georgia, serif;font-size:72px;font-weight:600;line-height:1.1">Scope, drafted by AI, confirmed by you</h2>
+<div style="display:flex;flex-direction:row;gap:48px">
+<div style="flex:1;display:flex;flex-direction:column;gap:28px">
+<div style="display:flex;flex-direction:column;gap:6px"><p style="font-size:24px;font-weight:600;color:#777185">You</p><p style="font-size:30px;line-height:1.4">Tap Generate in RocketScope AI. Review each line, adjust a quantity if needed, confirm.</p></div>
+<div style="display:flex;flex-direction:column;gap:6px"><p style="font-size:24px;font-weight:600;color:#777185">RocketPlan</p><p style="font-size:30px;line-height:1.4">Drafts the scope from your photos, thermal images and readings, with the source photo on every line and quantities in SF, LF and EA.</p></div>
+<div style="display:flex;flex-direction:column;gap:6px"><p style="font-size:24px;font-weight:600;color:#9A00FF">You walk away with</p><p style="font-size:30px;line-height:1.4;font-weight:600">A scope written on site, not at the desk that night.</p></div>
+</div>
+<div style="width:640px;display:flex;flex-direction:column;gap:20px">
+<div style="display:flex;flex-direction:row;gap:24px;justify-content:center">
+<img src="https://flow.rocketplan.ai/img/3979ad3c9f19bf51e0c1d551e001175d.jpg" alt="RocketScope AI: one tap to generate the scope" style="width:240px;height:520px;object-fit:cover;border-radius:28px;box-shadow:0 14px 32px rgba(26,20,64,0.18)">
+<img src="https://flow.rocketplan.ai/img/4ac059132051beca636f2fecddc18bc9.jpg" alt="RocketScope AI: draft scope with eight line items to confirm" style="width:240px;height:520px;object-fit:cover;border-radius:28px;box-shadow:0 14px 32px rgba(26,20,64,0.18)">
+</div>
+<p style="font-size:24px;line-height:1.4;color:#777185;text-align:center">One tap, then a draft scope to confirm line by line. 16 lines across the two sample rooms.</p>
+</div>
+</div>
+<img src="https://flow.rocketplan.ai/img/454955e6c5f62c85d9ca0b89e7b320ba.png" alt="RocketPlan" style="position:absolute;left:128px;top:40px;width:240px;height:40px;object-fit:contain">
+<div style="position:absolute;left:128px;bottom:64px;width:1664px;display:flex;flex-direction:row;gap:8px">
+<div style="flex:1;border-top:6px solid #E4D8F6;padding:10px 0 0 0"><p style="font-size:24px;color:#777185">Set up</p></div>
+<div style="flex:1;border-top:6px solid #E4D8F6;padding:10px 0 0 0"><p style="font-size:24px;color:#777185">Authorize</p></div>
+<div style="flex:1;border-top:6px solid #9A00FF;padding:10px 0 0 0"><p style="font-size:24px;color:#1E0D47;font-weight:600">On site</p></div>
+<div style="flex:1;border-top:6px solid #E4D8F6;padding:10px 0 0 0"><p style="font-size:24px;color:#777185">Get paid</p></div>
+</div>
+</section>
+<section id="s09-equipment" data-transition="fade" style="background:#FBFAFD;color:#1E0D47;font-family:'IBM Plex Sans', Arial, sans-serif;padding:96px 128px 176px;display:flex;flex-direction:column;gap:32px">
+<p style="font-size:24px;font-weight:600;color:#9A00FF;letter-spacing:2px;text-transform:uppercase">On site</p>
+<h2 style="font-family:'Source Serif 4', Georgia, serif;font-size:72px;font-weight:600;line-height:1.1">Place and log the equipment</h2>
+<div style="display:flex;flex-direction:row;gap:48px">
+<div style="flex:1;display:flex;flex-direction:column;gap:28px">
+<div style="display:flex;flex-direction:column;gap:6px"><p style="font-size:24px;font-weight:600;color:#777185">You</p><p style="font-size:30px;line-height:1.4">Confirm the equipment RocketEquipmentAI suggests for each room, then log placement and pickup as you go.</p></div>
+<div style="display:flex;flex-direction:column;gap:6px"><p style="font-size:24px;font-weight:600;color:#777185">RocketPlan</p><p style="font-size:30px;line-height:1.4">Keeps the Equipment Logs: units, days on site and unit-days, for the job and for each room.</p></div>
+<div style="display:flex;flex-direction:column;gap:6px"><p style="font-size:24px;font-weight:600;color:#9A00FF">You walk away with</p><p style="font-size:30px;line-height:1.4;font-weight:600">Every unit-day billable and backed up.</p></div>
+</div>
+<div style="width:640px;display:flex;flex-direction:column;gap:20px">
+<div style="display:flex;flex-direction:row;gap:24px;justify-content:center">
+<img src="https://flow.rocketplan.ai/img/0daa87183e0c9f93aeed4b0c61064d9f.jpg" alt="RocketEquipmentAI: one tap to generate the equipment list" style="width:240px;height:520px;object-fit:cover;border-radius:28px;box-shadow:0 14px 32px rgba(26,20,64,0.18)">
+<img src="https://flow.rocketplan.ai/img/e59068a2b280406f980f90f3a17a447a.jpg" alt="RocketEquipmentAI: equipment list with a dehumidifier and two air movers to adjust and share" style="width:240px;height:520px;object-fit:cover;border-radius:28px;box-shadow:0 14px 32px rgba(26,20,64,0.18)">
+</div>
+<p style="font-size:24px;line-height:1.4;color:#777185;text-align:center">One tap, then a list to adjust and share. 5 units, 4 days each, 20 unit-days on the sample job.</p>
+</div>
+</div>
+<img src="https://flow.rocketplan.ai/img/454955e6c5f62c85d9ca0b89e7b320ba.png" alt="RocketPlan" style="position:absolute;left:128px;top:40px;width:240px;height:40px;object-fit:contain">
+<div style="position:absolute;left:128px;bottom:64px;width:1664px;display:flex;flex-direction:row;gap:8px">
+<div style="flex:1;border-top:6px solid #E4D8F6;padding:10px 0 0 0"><p style="font-size:24px;color:#777185">Set up</p></div>
+<div style="flex:1;border-top:6px solid #E4D8F6;padding:10px 0 0 0"><p style="font-size:24px;color:#777185">Authorize</p></div>
+<div style="flex:1;border-top:6px solid #9A00FF;padding:10px 0 0 0"><p style="font-size:24px;color:#1E0D47;font-weight:600">On site</p></div>
+<div style="flex:1;border-top:6px solid #E4D8F6;padding:10px 0 0 0"><p style="font-size:24px;color:#777185">Get paid</p></div>
+</div>
+</section>
+<section id="s10-package" data-transition="fade" style="background:#FBFAFD;color:#1E0D47;font-family:'IBM Plex Sans', Arial, sans-serif;padding:96px 128px 176px;display:flex;flex-direction:column;gap:32px">
+<p style="font-size:24px;font-weight:600;color:#9A00FF;letter-spacing:2px;text-transform:uppercase">Get paid</p>
+<h2 style="font-family:'Source Serif 4', Georgia, serif;font-size:72px;font-weight:600;line-height:1.1">Send the Invoice Backup Package</h2>
+<div style="display:flex;flex-direction:row;gap:48px">
+<div style="flex:1;display:flex;flex-direction:column;gap:28px">
+<div style="display:flex;flex-direction:column;gap:6px"><p style="font-size:24px;font-weight:600;color:#777185">You</p><p style="font-size:30px;line-height:1.4">Pick Invoice Backup Package. Every component is already in. Untick anything you do not want, then send.</p></div>
+<div style="display:flex;flex-direction:column;gap:6px"><p style="font-size:24px;font-weight:600;color:#777185">RocketPlan</p><p style="font-size:30px;line-height:1.4">Flags anything missing with a one-tap fix, such as sending the Certificate of Completion for signature, and sends the package as a link or a PDF.</p></div>
+<div style="display:flex;flex-direction:column;gap:6px"><p style="font-size:24px;font-weight:600;color:#9A00FF">You walk away with</p><p style="font-size:30px;line-height:1.4;font-weight:600">One link with everything the adjuster needs to approve the invoice.</p></div>
+</div>
+<div style="width:640px;display:flex;flex-direction:column;gap:20px">
+<img src="https://flow.rocketplan.ai/img/6cbfe8a781bdcdb9cd213b0d51775029.jpg" alt="The adjuster's view of the Invoice Backup Package at reports.rocketplan.ai, with contents, signed status and print and download buttons" style="width:640px;height:400px;object-fit:contain;background:#FFFFFF;border:1px solid #D2CFDA;border-radius:16px;box-shadow:0 14px 32px rgba(26,20,64,0.12)">
+<p style="font-size:24px;line-height:1.4;color:#777185">What the adjuster sees at reports.rocketplan.ai/p/7k2m9: the whole job, with the Certificate of Completion marked pending and updating itself when signed.</p>
+</div>
+</div>
+<img src="https://flow.rocketplan.ai/img/454955e6c5f62c85d9ca0b89e7b320ba.png" alt="RocketPlan" style="position:absolute;left:128px;top:40px;width:240px;height:40px;object-fit:contain">
+<div style="position:absolute;left:128px;bottom:64px;width:1664px;display:flex;flex-direction:row;gap:8px">
+<div style="flex:1;border-top:6px solid #E4D8F6;padding:10px 0 0 0"><p style="font-size:24px;color:#777185">Set up</p></div>
+<div style="flex:1;border-top:6px solid #E4D8F6;padding:10px 0 0 0"><p style="font-size:24px;color:#777185">Authorize</p></div>
+<div style="flex:1;border-top:6px solid #E4D8F6;padding:10px 0 0 0"><p style="font-size:24px;color:#777185">On site</p></div>
+<div style="flex:1;border-top:6px solid #9A00FF;padding:10px 0 0 0"><p style="font-size:24px;color:#1E0D47;font-weight:600">Get paid</p></div>
+</div>
+</section>
+<section id="value" data-transition="fade" style="background:#F3F3F6;color:#1E0D47;font-family:'IBM Plex Sans', Arial, sans-serif;padding:96px 128px 160px;display:flex;flex-direction:column;gap:40px">
+<p style="font-size:24px;font-weight:600;color:#9A00FF;letter-spacing:2px;text-transform:uppercase">What changes</p>
+<h2 style="font-family:'Source Serif 4', Georgia, serif;font-size:72px;font-weight:600;line-height:1.1">Documentation done on site, invoice out the week the job closes</h2>
+<div style="display:grid;grid-template-columns:repeat(3, 1fr);gap:32px">
+<div style="background:#FFFFFF;border:1px solid #D2CFDA;border-radius:20px;padding:40px;display:flex;flex-direction:column;gap:12px">
+<p style="font-size:24px;font-weight:600;color:#777185">Documentation time per job</p>
+<p style="font-family:'Source Serif 4', Georgia, serif;font-size:56px;font-weight:600;line-height:1.1;letter-spacing:-1px;white-space:nowrap;color:#9A00FF">4.2 h → 1.6 h</p>
+<p style="font-size:30px;line-height:1.4;color:#4A3D66">Captured once in the field, assembled by the app.</p>
+</div>
+<div style="background:#FFFFFF;border:1px solid #D2CFDA;border-radius:20px;padding:40px;display:flex;flex-direction:column;gap:12px">
+<p style="font-size:24px;font-weight:600;color:#777185">Invoice sent</p>
+<p style="font-family:'Source Serif 4', Georgia, serif;font-size:56px;font-weight:600;line-height:1.1;letter-spacing:-1px;white-space:nowrap;color:#9A00FF">Day 12 → Day 6</p>
+<p style="font-size:30px;line-height:1.4;color:#4A3D66">The package is ready the day the job is done.</p>
+</div>
+<div style="background:#FFFFFF;border:1px solid #D2CFDA;border-radius:20px;padding:40px;display:flex;flex-direction:column;gap:12px">
+<p style="font-size:24px;font-weight:600;color:#777185">Estimator hours back per month</p>
+<p style="font-family:'Source Serif 4', Georgia, serif;font-size:56px;font-weight:600;line-height:1.1;letter-spacing:-1px;white-space:nowrap;color:#9A00FF">78 h</p>
+<p style="font-size:30px;line-height:1.4;color:#4A3D66">At 30 jobs a month, with fewer questions back from adjusters.</p>
+</div>
+</div>
+<p style="font-size:30px;line-height:1.4;color:#4A3D66">What does not change: your team reviews and confirms every line before anything is sent.</p>
+<img src="https://flow.rocketplan.ai/img/454955e6c5f62c85d9ca0b89e7b320ba.png" alt="RocketPlan" style="position:absolute;left:128px;top:40px;width:240px;height:40px;object-fit:contain">
+<p style="position:absolute;left:128px;bottom:64px;width:1664px;font-size:24px;color:#777185">Illustrative figures for a typical residential water-loss contractor. Your numbers depend on your job mix and current process.</p>
+</section>
+<section id="close" data-transition="fade" style="background:#F4E5FF;color:#1E0D47;font-family:'IBM Plex Sans', Arial, sans-serif;padding:128px;display:flex;flex-direction:row;align-items:center;gap:96px">
+<div style="flex:1;display:flex;flex-direction:column;gap:32px">
+<p style="font-size:24px;font-weight:600;color:#9A00FF;letter-spacing:2px;text-transform:uppercase">Next step</p>
+<h1 style="font-family:'Source Serif 4', Georgia, serif;font-size:112px;font-weight:600;line-height:1.05">See it on your own jobs</h1>
+<p style="font-size:36px;line-height:1.4;color:#4A3D66">Book a walkthrough at rocketplan.ai. Bring one recent job and we will run it through RocketPlan together.</p>
+</div>
+<div style="width:520px;height:520px;background:#FFFFFF;border-radius:32px;display:flex;align-items:center;justify-content:center">
+<img src="https://flow.rocketplan.ai/img/454955e6c5f62c85d9ca0b89e7b320ba.png" alt="RocketPlan logo" style="width:400px;height:120px;object-fit:contain">
+</div>
+<p style="position:absolute;left:128px;bottom:64px;width:800px;font-size:24px;color:#777185">rocketplan.ai</p>
+</section></div></div>
+<div id="hit-l" title="Previous"></div><div id="hit-r" title="Next"></div>
+<button id="arr-l" class="arr" type="button" aria-label="Previous slide">&#8249;</button><button id="arr-r" class="arr" type="button" aria-label="Next slide">&#8250;</button>
+<div id="hint">Use the arrows, the arrow keys, or swipe to move between slides</div>
+<div id="bar"><button id="nav-prev" type="button">&#8592; Previous</button><div id="dots"></div><span id="ctr"></span><button id="nav-next" type="button" class="primary">Next slide &#8594;</button><a id="book" href="https://rocketplan.ai" target="_blank" rel="noopener">Book a walkthrough</a><button id="fs" type="button" aria-label="Full screen"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg><span class="tx">Full screen</span></button></div><button id="fs-x" type="button" aria-label="Exit full screen">&#215;</button>
+<script>
+const ICONS={"Search": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\"><circle cx=\"11\" cy=\"11\" r=\"7\"/><path d=\"m20 20-3.5-3.5\"/></svg>", "Activity": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M2 12h4l3-8 4 16 3-8h6\"/></svg>", "Home": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M3 11 12 3l9 8\"/><path d=\"M5 10v10h5v-6h4v6h5V10\"/></svg>", "Book": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M4 4h7a3 3 0 0 1 3 3v13a2 2 0 0 0-2-2H4z\"/><path d=\"M20 4h-7a3 3 0 0 0-3 3v13a2 2 0 0 1 2-2h8z\"/></svg>", "Tool": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M14.7 6.3a4 4 0 0 0 5 5L13 18a2 2 0 0 1-3 0l-4-4a2 2 0 0 1 0-3l6.7-6.7a4 4 0 0 0 2 2z\"/><path d=\"M3 21l4-4\"/></svg>", "Verified": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M12 2 4 5v6c0 5 3.5 9.5 8 11 4.5-1.5 8-6 8-11V5z\"/><path d=\"m9 12 2 2 4-4\"/></svg>", "CheckCircle": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><circle cx=\"12\" cy=\"12\" r=\"10\"/><path d=\"m8.5 12.5 2.5 2.5 5-5\"/></svg>", "Link": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M10 14a5 5 0 0 0 7 0l3-3a5 5 0 0 0-7-7l-1 1\"/><path d=\"M14 10a5 5 0 0 0-7 0l-3 3a5 5 0 0 0 7 7l1-1\"/></svg>"};
+document.querySelectorAll('x-icon').forEach(e=>{e.innerHTML=ICONS[e.getAttribute('name')]||'';});
+const S=[...document.querySelectorAll('#frame>section')],ids=S.map(s=>s.id);let i=Math.max(0,ids.indexOf(location.hash.slice(1)));
+const dots=document.getElementById('dots');S.forEach((s,k)=>{const d=document.createElement('i');d.onclick=()=>go(k);dots.appendChild(d);});
+let moved=0;const isPhone=()=>matchMedia('(max-width:700px)').matches;function go(k,scroll){if(++moved>1)document.getElementById('hint').classList.add('off');i=(k+S.length)%S.length;S.forEach((s,j)=>s.classList.toggle('on',j===i));[...dots.children].forEach((d,j)=>d.classList.toggle('on',j===i));document.getElementById('ctr').textContent=(i+1)+' / '+S.length;history.replaceState(null,'','#'+ids[i]);if(isPhone()&&scroll!==false)S[i].scrollIntoView({behavior:'smooth',block:'start'});}
+function fit(){const f=document.getElementById('frame');if(isPhone()){f.style.transform='';return;}const pf=document.body.classList.contains('pfs');const sc=Math.min((innerWidth-(pf?0:140))/1920,(innerHeight-(pf?0:64))/1080);f.style.transform='scale('+sc+')';}
+addEventListener('resize',fit);fit();go(i);if(isPhone()){let t=null;addEventListener('scroll',()=>{clearTimeout(t);t=setTimeout(()=>{let best=0,bd=1e9;S.forEach((s,j)=>{const d=Math.abs(s.getBoundingClientRect().top);if(d<bd){bd=d;best=j;}});if(best!==i){i=best;history.replaceState(null,'','#'+ids[i]);}},120);},{passive:true});}
+document.getElementById('nav-prev').onclick=()=>go(i-1);document.getElementById('nav-next').onclick=()=>go(i+1);document.getElementById('arr-l').onclick=()=>go(i-1);document.getElementById('arr-r').onclick=()=>go(i+1);document.getElementById('hit-l').onclick=()=>go(i-1);document.getElementById('hit-r').onclick=()=>go(i+1);
+const root=document.documentElement,canFS=!!(root.requestFullscreen||root.webkitRequestFullscreen);function pfs(on){document.body.classList.toggle('pfs',on);fit();}
+document.getElementById('fs').onclick=()=>{const fe=document.fullscreenElement||document.webkitFullscreenElement;if(fe){(document.exitFullscreen||document.webkitExitFullscreen).call(document);return;}if(document.body.classList.contains('pfs')){pfs(false);return;}if(canFS){try{const p=(root.requestFullscreen||root.webkitRequestFullscreen).call(root);if(p&&p.catch)p.catch(()=>{});}catch(e){}setTimeout(()=>{if(!(document.fullscreenElement||document.webkitFullscreenElement))pfs(true);},500);}else pfs(true);};
+document.getElementById('fs-x').onclick=()=>pfs(false);addEventListener('keydown',e=>{if(e.key==='Escape'&&document.body.classList.contains('pfs'))pfs(false);});
+addEventListener('keydown',e=>{if(['ArrowRight','ArrowDown','PageDown',' '].includes(e.key)){go(i+1);e.preventDefault();}if(['ArrowLeft','ArrowUp','PageUp'].includes(e.key)){go(i-1);e.preventDefault();}if(e.key==='Home')go(0);if(e.key==='End')go(S.length-1);if(e.key==='f')document.getElementById('fs').click();});
+let tx=null;addEventListener('touchstart',e=>{tx=e.touches[0].clientX;document.body.classList.add('touch');},{passive:true});addEventListener('touchend',e=>{if(tx===null||isPhone())return;const dx=e.changedTouches[0].clientX-tx;if(Math.abs(dx)>40)go(i+(dx<0?1:-1));tx=null;});
+</script></body></html>
